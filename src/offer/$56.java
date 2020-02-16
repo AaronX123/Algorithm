@@ -10,12 +10,11 @@ import util.ListNode;
  */
 public class $56 {
     /**
-     * pA和pB,2vpA = vpB;当pA 和 pB 相遇时说明遇到环。然后将pA置到链表头，然后va = vb，再次相遇就是第一次交点
+     * pA和pB,2vpA = vpB;当pA 和 pB 相遇时说明遇到环。然后将pA置到链表头，然后va = vb，再次相遇就是第一个交点
      * @param pHead
      * @return
      */
-    public ListNode EntryNodeOfLoop(ListNode pHead)
-    {
+    public ListNode EntryNodeOfLoop(ListNode pHead) {
         ListNode fast=pHead;
         ListNode low=pHead;
         while(fast!=null&&fast.next!=null){
