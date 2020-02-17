@@ -1,6 +1,7 @@
 package offer;
 
 import util.TreeLinkNode;
+import util.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,47 +49,23 @@ public class $58 {
         inSearch(node.right);
     }
 
-    public TreeLinkNode GetNext2(TreeLinkNode pNode) {
-        TreeLinkNode head = null;
-        if (pNode == null){
+    public TreeLinkNode GetNext2(TreeLinkNode p) {
+        if (p == null){
             return null;
         }
-        TreeLinkNode temp = pNode;
-        // 右子树不为空则去找右子树的最左节点
-        if (temp.right != null){
-            TreeLinkNode tempRight = temp.right;
-            while (tempRight.left !=null){
-                    tempRight = tempRight.left;
+        // 如果当前节点如果有右子树，则下一个中序遍历的节点就是右子树最左叶节点
+        if (p.right != null){
+            TreeLinkNode temp = p.right;
+            while (temp.left != null){
+                temp = temp.left;
             }
-            return tempRight;
-        }else {
-            /*
-            * 2种情况：
-            * 1如果当前节点存在头节点且为左子树，则下一个节点就是头节点，如果不存在则为null
-            * 2如果当前节点存在头节点且为右子树，则下一个节点为头节点的头节点，如果不存在头节点的头节点则返回null
-            */
-            TreeLinkNode parent = temp.next;
-            // 当前节点就是头节点，说明没有了
-            if (parent == null){
-                return null;
+            return temp;
+        }
+        while(p.next !=null){
+            if(p.next.left==p){
+                return p.next;
             }
-            else {
-                if (parent.left != null && parent.left.val == temp.val){
-                    return parent;
-                }
-                if (parent.right != null && parent.right.val == temp.val){
-                    // 如果父节点的父节点为空
-                    if (parent.next == null){
-                        return null;
-                    }
-                    if (parent.next.left != null && parent.next.left.val == parent.val){
-                        return parent.next;
-                    }
-                    if (parent.next.right != null && parent.next.right.val == parent.val){
-                        return null;
-                    }
-                }
-            }
+            p=p.next;
         }
         return null;
     }
