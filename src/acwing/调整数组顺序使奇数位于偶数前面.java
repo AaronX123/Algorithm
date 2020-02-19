@@ -1,5 +1,7 @@
 package acwing;
 
+import static offer.$13.isOdd;
+
 /**
  * 输入一个整数数组，实现一个函数来调整该数组中数字的顺序。
  *
@@ -18,26 +20,24 @@ public class 调整数组顺序使奇数位于偶数前面 {
      *
      * @param array
      */
-    public void reOrderArray(int [] array) {
-        // 奇数的位置
-        int oddIndex = -1;
-        // 偶数的位置
-        int evenIndex = -1;
-
+    public static void reOrderArray(int [] array) {
+        int left = -1;
         for (int i = 0; i < array.length; i++) {
-            // 是偶数，则不动
-            if (array[i] % 2 == 0){
-                if (evenIndex == -1){
-                    evenIndex = i;
+            if (isOdd(array[i])){
+                //先保存奇数，然后将奇数到left中间的偶数全部后移
+                int temp = array[i];
+                //将偶数全部后移
+                for (int j = i - 1; j > left; j--){
+                    array[j + 1] = array[j];
                 }
-            }else {
-                if (evenIndex != -1){
-                    int temp = array[i];
-                    array[i] = array[evenIndex];
-                    array[evenIndex] = temp;
-                    evenIndex = i;
-                }
+                //放置奇数
+                array[left + 1] = temp;
+                left++;
             }
         }
     }
+    public static boolean isOdd(int num){
+        return num % 2 == 1;
+    }
+
 }

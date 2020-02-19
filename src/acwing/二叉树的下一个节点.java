@@ -51,4 +51,14 @@ class TreeNode {
   TreeNode right;
   TreeNode father;
   TreeNode(int x) { val = x; }
+
+    @Override
+    public String toString() {
+        return "TreeNode{" +
+                "val=" + val +
+                ", left=" + left +
+                ", right=" + right +
+                ", father=" + father +
+                '}';
+    }
 }

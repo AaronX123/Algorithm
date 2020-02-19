@@ -33,8 +33,7 @@ public class Main{
         return stringBuilder.toString();
     }
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        try {
+        try (Scanner scan = new Scanner(System.in)){
             String s_nextLine = scan.nextLine();
             String[] line = s_nextLine.split("\\s+");
             String template = line[0];
@@ -43,8 +42,6 @@ public class Main{
                 param.put(line[i], line[i + 1]);
             }
             System.out.println(format(template, param));
-        } finally {
-            scan.close();
         }
     }
 }

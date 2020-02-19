@@ -13,4 +13,13 @@ public class RandomListNode {
     public RandomListNode(int label) {
         this.label = label;
     }
+
+    @Override
+    public String toString() {
+        return "RandomListNode{" +
+                "label=" + label +
+                ", next=" + next +
+                ", random=" + random +
+                '}';
+    }
 }

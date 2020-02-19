@@ -8,22 +8,24 @@ import util.TreeNode;
  * @since 2019-11-04
  */
 public class $17 {
-    public static boolean HasSubtree(TreeNode root1, TreeNode root2) {
-        if (root1 == null || root2 == null){
+    public static boolean HasSubtree(TreeNode pRoot1, TreeNode pRoot2) {
+        if (pRoot1 == null || pRoot2 == null){
             return false;
         }
-        return isSubTree(root1, root2) || HasSubtree(root1.left, root2) || HasSubtree(root1.right, root2);
-    }
-    public static boolean isSubTree(TreeNode root1, TreeNode root2){
-        if (root1 == null ){
-            return false;
-        }
-        if (root2 == null){
+        if (isPart(pRoot1,pRoot2)){
             return true;
         }
-        if (root1.val == root2.val){
-            return isSubTree(root1.left,root2.left) && isSubTree(root1.right, root2.right);
+        return HasSubtree(pRoot1.left,pRoot2) || HasSubtree(pRoot1.right,pRoot2);
+    }
+
+    private static boolean isPart(TreeNode p1, TreeNode p2){
+        if (p2 == null){
+            return true;
         }
-        return false;
+        if (p1 == null || p1.val != p2.val){
+            return false;
+        }
+
+        return isPart(p1.left,p2.left) && isPart(p1.right,p2.right);
     }
 }

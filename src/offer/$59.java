@@ -25,8 +25,7 @@ public class $59 {
                 && isSymmetrical(left.right, right.left);
     }
 
-    boolean isSymmetricalDFS(TreeNode pRoot)
-    {
+    boolean isSymmetricalDFS(TreeNode pRoot) {
         if(pRoot == null) return true;
         Stack<TreeNode> s = new Stack<>();
         s.push(pRoot.left);

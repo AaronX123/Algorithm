@@ -14,4 +14,14 @@ public class TreeLinkNode {
     public TreeLinkNode(int val) {
         this.val = val;
     }
+
+    @Override
+    public String toString() {
+        return "TreeLinkNode{" +
+                "val=" + val +
+                ", left=" + left +
+                ", right=" + right +
+                ", next=" + next +
+                '}';
+    }
 }
