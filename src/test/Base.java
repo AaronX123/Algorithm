@@ -5,7 +5,7 @@ package test;
  * @version 1.0
  * @since 2019-09-18
  */
-public class Base
+public class Base extends er
 {
     private String baseName = "base";
     public Base()
@@ -31,4 +31,5 @@ public class Base
     {
         Base b = new Sub();
     }
+
 }

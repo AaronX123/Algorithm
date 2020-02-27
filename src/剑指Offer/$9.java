@@ -7,7 +7,7 @@ package 剑指Offer;
  */
 public class $9 {
     public static void main(String[] args) {
-        System.out.println(JumpFloorII(4));
+        System.out.println(JumpFloorII(10));
     }
 
     /**

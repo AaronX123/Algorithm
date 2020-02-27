@@ -26,4 +26,8 @@ public class $8 {
         }
         return result;
     }
+
+    public static void main(String[] args) {
+        System.out.println(new $8().JumpFloor(9));;
+    }
 }
