@@ -1,0 +1,73 @@
+package concurrent;
+
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.TimeUnit;
+
+public class BlockingQueueTest {
+    static volatile BlockingQueue<Integer> blockingQueue = new ArrayBlockingQueue<>(3);
+    static volatile BlockingQueue<Integer> synchronousQueue = new SynchronousQueue<>();
+    public static void main(String[] args) {
+        testSynchronousQueue();
+    }
+
+    public static void testSynchronousQueue() {
+        Thread a = new Thread(() -> {
+            try {
+                synchronousQueue.put(1);
+                System.out.println(1);
+                synchronousQueue.put(2);
+                System.out.println(2);
+                synchronousQueue.put(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        });
+        Thread b = new Thread(() ->{
+            try {
+
+                for (int i = 0; i < 10; i++) {
+                    Thread.sleep(1100);
+                    System.out.println("取出"+synchronousQueue.take());
+                }
+
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        a.start();
+        b.start();
+    }
+
+    public static void testArrayBlockingQueue() {
+        Thread a = new Thread(() -> {
+            blockingQueue.add(1);
+            blockingQueue.add(2);
+            blockingQueue.add(3);
+            try {
+                blockingQueue.offer(4,2, TimeUnit.SECONDS);
+                System.out.println("插入5是否成功：" + blockingQueue.offer(5,2,TimeUnit.SECONDS));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        });
+        Thread b = new Thread(() -> {
+            try {
+                while (!blockingQueue.isEmpty()){
+                    System.out.println("获取:" + blockingQueue.take());
+                    Thread.sleep(100);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        a.start();
+        b.start();
+    }
+
+}

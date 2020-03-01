@@ -60,7 +60,7 @@ public class $45 {
         if (str.trim().equals("") && str.length() > 0) {
             return str;
         }
-        Stack<String> reverse = new Stack();
+        Stack<String> reverse = new Stack<>();
         String string = str.trim();
         String[] strings = string.split(" ");
         for (int i = 0; i < strings.length; i++) {
