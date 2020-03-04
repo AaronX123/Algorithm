@@ -15,5 +15,6 @@ public class AtomicIntTest {
         integer.compareAndSet(5,2);
         integer.compareAndSet(2,3);
         System.out.println(integer.get());
+
     }
 }
