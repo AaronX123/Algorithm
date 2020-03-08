@@ -9,7 +9,6 @@ import java.util.List;
 public class GcOverLimitException {
     public static void main(String[] args) {
         List<String> list = new ArrayList<>();
-        String a = "1";
         int i = 0;
        try {
            while (true){
