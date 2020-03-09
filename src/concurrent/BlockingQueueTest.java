@@ -1,12 +1,21 @@
 package concurrent;
 
+import java.io.BufferedReader;
+import java.util.Scanner;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.TimeUnit;
 
 public class BlockingQueueTest {
+    /**
+     * ArrayBlockingQueue是限制队列长度，当新加入的元素超过长度，如果设置了等待时间，超时就抛出异常
+     */
     static volatile BlockingQueue<Integer> blockingQueue = new ArrayBlockingQueue<>(3);
+
+    /**
+     * SynchronousQueue是每次只存入1个元素，当另外元素入队时会阻塞，当元素取出后才能继续入队
+     */
     static volatile BlockingQueue<Integer> synchronousQueue = new SynchronousQueue<>();
     public static void main(String[] args) {
         testSynchronousQueue();
