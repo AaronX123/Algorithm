@@ -56,4 +56,27 @@ public class 数学知识 {
     int lcm(int a, int b){
         return a * b / gcd(a, b);
     }
+
+    /**
+     * 快速幂
+     * @param base
+     * @param exp
+     * @return
+     */
+    int fastPower(int base, int exp){
+        int res = 1;
+        int base2 = base;
+        while (exp != 0){
+            if ((exp & 1) != 0){
+                res = res * base2;
+            }
+            base2 *=  base2;
+            exp >>= 1;
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new 数学知识().fastPower(2,5));
+    }
 }
