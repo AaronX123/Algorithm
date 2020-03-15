@@ -5,13 +5,18 @@ import java.util.Scanner;
 
 public class CommonTest {
     public static void main(String[] args) {
-        new CommonTest().A();
+        new CommonTest();
     }
-    public synchronized void  A(){
-        System.out.println("A");
-        B();
+
+    static {
+        System.out.println("静态块");
     }
-    public synchronized void B(){
-        System.out.println("B");
+
+    {
+        System.out.println("构造块");
+    }
+
+    CommonTest(){
+        System.out.println("构造器");
     }
 }

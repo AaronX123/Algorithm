@@ -24,6 +24,7 @@ public class CommonTest {
         System.out.println(test.VerifySquenceOfBST(new int[]{7,4,6,5}));
         System.out.println(test.GetLeastNumbers_Solution(new int[]{4,5,1,6,2,7,3,8},4));
         System.out.println(test.GetNumberOfK(new int[]{1,2,3,3,3,3},3));
+        System.out.println(Math.floorMod(-3,9));
     }
 
     public void change(Person p){
@@ -962,5 +963,95 @@ public class CommonTest {
         }
         num1[0] = first;
         num2[0] = sum ^ first;
+    }
+
+    /**
+     *  1 2 3 4 5 6
+     * @param array
+     * @param sum
+     * @return
+     */
+    public ArrayList<Integer> FindNumbersWithSum(int [] array,int sum) {
+        int res = Integer.MAX_VALUE;
+        int a = 0;
+        int b = 0;
+        for (int i = 0; i < array.length; i++) {
+            for (int j = i; j < array.length; j++) {
+                if (sum == array[i] + array[j]){
+                    if (array[i] * array[j] < res){
+                        res = array[i] * array[j];
+                        a = array[i];
+                        b = array[j];
+                        break;
+                    }
+                }
+            }
+        }
+        if (res == Integer.MAX_VALUE){
+            return new ArrayList<>();
+        }
+        ArrayList<Integer> re = new ArrayList<>();
+        re.add(a);
+        re.add(b);
+        return re;
+    }
+
+    /**
+     * 每一个字符在前后的关系是 （当前位置 - 左移个数） % 字符串长度
+     * @param str
+     * @param n
+     * @return
+     */
+    public String LeftRotateString(String str,int n) {
+        char[] chars = str.toCharArray();
+        char[] newChars = new char[chars.length];
+        for (int i = 0; i < chars.length; i++) {
+            int newPos = Math.floorMod((i - n),chars.length);
+            newChars[newPos] = chars[i];
+        }
+        return new String(newChars);
+    }
+
+    public String ReverseSentence(String str) {
+        if (str.trim().equals("") && str.length() > 0) {
+            return str;
+        }
+        String[] strings = str.split(" ");
+        StringBuilder sb = new StringBuilder();
+        for (int i = strings.length - 1; i > 0; i--) {
+            sb.append(strings[i]);
+            sb.append(" ");
+        }
+        sb.append(strings[0]);
+        return sb.toString();
+    }
+
+    public boolean isContinuous(int [] numbers) {
+        if (numbers == null || numbers.length != 5){
+            return false;
+        }
+        Arrays.sort(numbers);
+        // 超出牌面
+        if (numbers[0] < 0 || numbers[4] > 13){
+            return false;
+        }
+        // 大小王的个数
+        int kings = 0;
+        //
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] == 0){
+                kings++;
+            }
+            // 出现了一样的数字直接返回false
+            else if (i < 4 && numbers[i] == numbers[i + 1]){
+                return false;
+            }
+            // 间隔为1,则用大小王
+            else if (i < 4){
+                int k = numbers[i + 1] - numbers[i] - 1;
+                kings -= k;
+            }
+        }
+        return kings >= 0;
     }
 }
