@@ -26,8 +26,8 @@ public class 数学知识 {
                 int s = 0;
                 while (x % i == 0) {
                     x /= i;
+                    s++;
                 }
-                s++;
                 System.out.println(i);
                 System.out.println(s);
             }
@@ -35,6 +35,22 @@ public class 数学知识 {
         if (x > 1){
             System.out.println(x+" 1");
         }
+    }
+
+
+    int getPrimes(int n){
+        int cnt = 0;
+        int[] primes = new int[n + 1];
+        boolean[] st = new boolean[n + 1];
+        for (int i = 2; i <= n; i++) {
+            if (!st[i]) {
+                primes[cnt++] = i;
+                for (int j = i + i; j <= n; j += i){
+                    st[j] = true;
+                }
+            }
+        }
+        return cnt;
     }
 
     /**

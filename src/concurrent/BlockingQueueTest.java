@@ -2,14 +2,13 @@ package concurrent;
 
 import java.io.BufferedReader;
 import java.util.Scanner;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class BlockingQueueTest {
     /**
      * ArrayBlockingQueue是限制队列长度，当新加入的元素超过长度，如果设置了等待时间，超时就抛出异常
+     * 原理：在take中判断是否队列元素为空，如果为空则Condition.await(),当add/offer之后会调用Condition.signal()唤醒
+     * take的线程。signal是将Condition中排队的线程的头节点线程调用unsafe.unpark进行唤醒。
      */
     static volatile BlockingQueue<Integer> blockingQueue = new ArrayBlockingQueue<>(3);
 
@@ -17,6 +16,8 @@ public class BlockingQueueTest {
      * SynchronousQueue是每次只存入1个元素，当另外元素入队时会阻塞，当元素取出后才能继续入队
      */
     static volatile BlockingQueue<Integer> synchronousQueue = new SynchronousQueue<>();
+
+    static volatile BlockingQueue<Integer> linkedQueue = new LinkedBlockingQueue<>();
     public static void main(String[] args) {
         testSynchronousQueue();
     }
